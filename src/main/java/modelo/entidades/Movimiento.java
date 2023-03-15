@@ -14,6 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+/**
+ * La clase Movimiento representa un registro de movimiento de dinero entre dos cuentas.
+ * Contiene atributos como el concepto del movimiento, su valor, la fecha en que se realizó,
+ * y las cuentas de origen y destino del movimiento.
+ * @author Juan Posso, Javier Revelo, Valery Vallejo, Cristian Verduga, Fernando Soto
+ * @version 1.1
+ * 
+ */
 @Entity
 @Table(name = "movimiento")
 public class Movimiento implements Serializable{
@@ -40,12 +49,21 @@ public class Movimiento implements Serializable{
 	@JoinColumn(name = "cuenta_destino")
 	private Cuenta destino;
 	
-	
+	/**
+	 * Crea una instancia de Movimiento con sus atributos inicializados en null.
+	 */
 	public Movimiento() {
 	}
+	
 
-
-
+	/**
+	 * Crea una instancia de Movimiento con los valores recibidos como parámetros.
+	 * @param concepto concepto del movimiento
+	 * @param valor valor del movimiento
+	 * @param fecha fecha en que se realizó el movimiento
+	 * @param origen cuenta de origen del movimiento
+	 * @param destino cuenta de destino del movimiento
+	 */
 	public Movimiento(String concepto, double valor, Date fecha, Cuenta origen, Cuenta destino) {
 		super();
 		this.concepto = concepto;

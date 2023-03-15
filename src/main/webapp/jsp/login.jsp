@@ -31,10 +31,10 @@
                 <form method="POST" action="LoginController?ruta=login">
                     <div class="titulopantalla">LOGIN</div><br><br>
                     <label>Username</label><br>
-                    <input class="cajas" type="text" name="usuario" value="Insert your name" onclick = "if(this.value=='Insert your name') this.value=''">
+                    <input class="cajas" type="text" name="usuario" value="Insert your name" onclick = "if(this.value=='Insert your name') this.value=''" required="required">
                     <br><br>
                     <label>Password</label><br>
-                    <input class="cajas" type="password" name="password" value="Password" size="15" onclick = "if(this.value=='Password') this.value=''">
+                    <input class="cajas" type="password" name="password" value="Password" size="15" onclick = "if(this.value=='Password') this.value=''" required="required">
                     <br><br><br>
                     <input type="submit" value="Submit" class="btnPantalla">
                 </form>

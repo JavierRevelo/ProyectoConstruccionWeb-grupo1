@@ -15,19 +15,33 @@ import modelo.dto.CuentaDTO;
 import modelo.entidades.Cuenta;
 import utilidades.Mes;
 
+
+/**
+ * 
+ * Clase (Servlet) que representa el controlador para unir el modelo con la vista del Dashboard de la aplicacion web 
+ * @author Juan Posso, Javier Revelo, Valery Vallejo, Cristian Verduga, Fernando Soto
+ * @version 1.1
+ *
+ */
 @WebServlet("/DashboardController")
 public class DashboardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	/**
+	 * Constructor vacio necesario para un servlet que puede ser instanciado desde otras clases
+	 * @see HttpServlet#HttpServlet()
+	 */
     public DashboardController() {
         super();
     }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ruteador(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ruteador(request, response);
 	}
+	
 	
 	private void ruteador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String ruta = (request.getParameter("ruta")==null?"ver":request.getParameter("ruta"));
@@ -48,6 +62,8 @@ public class DashboardController extends HttpServlet {
 		List<CuentaDTO> conjuntoingresos = DAOFactory.getFactory().getCuentaDAO().getConsolidadoCuentasIngreso(mes);
 		List<CuentaDTO> conjuntogastos = DAOFactory.getFactory().getCuentaDAO().getConsolidadoCuentsEgreso(mes);
 		List<Cuenta> conjuntoingresogasto = DAOFactory.getFactory().getCuentaDAO().getConsolidadoCuentasIngresoEgreso();
+		
+		
 		
 		request.setAttribute("messeleccionado", mes);
 		request.setAttribute("meses", Mes.getMeses());

@@ -9,6 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/**
+ * La clase Movimiento representa un registro de movimiento de dinero entre dos cuentas.
+ * Contiene atributos como el ID de usaurio, Nombre del usuario y una clave
+ * @author Juan Posso, Javier Revelo, Valery Vallejo, Cristian Verduga, Fernando Soto
+ * @version 1.1
+ * 
+ */
 @Entity
 @Table(name="Usuario")
 public class Usuario implements Serializable {
@@ -26,11 +34,16 @@ public class Usuario implements Serializable {
 	@Column(name="clave")
 	private String clave;
 	
-	
-	public Usuario() {
-		
-	}
+	/**
+	 * Crea una instancia de usuario con valores predeterminados.
+	 */
+	public Usuario() {}
 
+	/**
+	 * Crea una instancia de usuario con el nombre y la clave especificados.
+	 * @param nombre el nombre del usuario
+	 * @param clave la clave del usuario
+	*/
 	public Usuario(String nombre, String clave) {
 		super();
 		this.nombre = nombre;

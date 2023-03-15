@@ -42,16 +42,16 @@
 
                     <label>Concept of the transaction</label><br>
                     <input class="cajas" type="text" name="concepto" value="Insert the concept of your transaction"
-                        onclick="if(this.value=='Insert the concept of your transaction') this.value=''">
+                        onclick="if(this.value=='Insert the concept of your transaction') this.value=''" required="required">
                     <br><br>
 
                     <label>Date</label><br>
-                    <input class="cajas" type="date" name="fecha" class="borde-azul">
+                    <input class="cajas" type="date" name="fecha" class="borde-azul" required="required">
                     <br><br>
 
                     <label>Value of the transaction</label><br>
                     <input class="cajas" type="text" name="valor" value="Insert the value of your transaction"
-                        onclick="if(this.value=='Insert the value of your transaction') this.value=''">
+                        onclick="if(this.value=='Insert the value of your transaction') this.value=''" required="required">
                     <br><br>
 
                     <label class="t-20px">Destination account</label><br>

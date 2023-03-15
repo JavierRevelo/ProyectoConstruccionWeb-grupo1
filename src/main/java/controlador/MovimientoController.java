@@ -20,51 +20,45 @@ import modelo.entidades.CuentaTipo;
 import modelo.entidades.Movimiento;
 import utilidades.Mes;
 
+/**
+ * 
+ * Clase (Servlet) que representa el controlador para unir el modelo con la vista de los movimientos de la aplicacion web 
+ * @author Juan Posso, Javier Revelo, Valery Vallejo, Cristian Verduga, Fernando Soto
+ * @version 1.1
+ *
+ */
 @WebServlet("/MovimientoController")
 public class MovimientoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
+	/**
+     * Constructor vacio necesario para un servlet que puede ser instanciado desde otras clases
+     * @see HttpServlet#HttpServlet()
+     */
 	public MovimientoController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			rutear(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+			try {
+				rutear(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			rutear(request, response);
-
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+			try {
+				rutear(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
 
 	private void rutear(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -87,10 +81,11 @@ public class MovimientoController extends HttpServlet {
 			errorEgreso(request, response);
 			break;
 		}
-		
+
 	}
 
-	private void errorEgreso(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void errorEgreso(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher("/jsp/gastoFallido.jsp").forward(request, response);
 	}
 
@@ -116,19 +111,10 @@ public class MovimientoController extends HttpServlet {
 		// Verificar fondos
 		double valorAntesCuentaOrigen = cuentaOrigen.getTotal();
 		if (valorAntesCuentaOrigen < valor) {
-			System.out.println("estoy en el errrrroooooasdasdkjd");
-			System.out.println(valorAntesCuentaOrigen);
-			System.out.println(valor);
 			request.getRequestDispatcher("MovimientoController?ruta=error").forward(request, response);
 			throw new Exception("Cuenta sin fondos");
 
 		}
-
-		// Crear objeto movitmiento
-		Movimiento movimiento = new Movimiento(concepto, valor, fecha, cuentaOrigen, cuentaDestino);
-
-		// Innsertar objeto movimiento en la base de datos
-		DAOFactory.getFactory().getMovimientoDAO().create(movimiento);
 
 		// Actualizar cuenta IngresoGasto
 
@@ -139,6 +125,12 @@ public class MovimientoController extends HttpServlet {
 		double valorAntesCuentaDestino = cuentaDestino.getTotal();
 		cuentaDestino.setTotal(valorAntesCuentaDestino + valor);
 		DAOFactory.getFactory().getCuentaDAO().update(cuentaDestino);
+
+		// Crear objeto movitmiento
+		Movimiento movimiento = new Movimiento(concepto, valor, fecha, cuentaOrigen, cuentaDestino);
+
+		// Innsertar objeto movimiento en la base de datos
+		DAOFactory.getFactory().getMovimientoDAO().create(movimiento);
 
 		System.out.println(cuentaDestino.toString());
 
@@ -166,23 +158,30 @@ public class MovimientoController extends HttpServlet {
 		Cuenta cuentaOrigen = DAOFactory.getFactory().getCuentaDAO().getById(idIngreso);
 		Cuenta cuentaDestino = DAOFactory.getFactory().getCuentaDAO().getById(idIngresoGasto);
 
+		// Actualizar cuento Ingreso
+		double valorAntesCuentaOrgien = cuentaOrigen.getTotal();
+		cuentaOrigen.setTotal(valorAntesCuentaOrgien - valor);
+		DAOFactory.getFactory().getCuentaDAO().update(cuentaDestino);
+		
+		// Actualizar cuenta IngresoGasto
+		double valorAntesCuentaDestino = cuentaDestino.getTotal();
+		cuentaDestino.setTotal(valorAntesCuentaDestino + valor);
+		DAOFactory.getFactory().getCuentaDAO().update(cuentaDestino);
+		
+
 		// Crear objeto movitmiento
 		Movimiento movimiento = new Movimiento(concepto, valor, fecha, cuentaOrigen, cuentaDestino);
 
 		// Innsertar objeto movimiento en la base de datos
 		DAOFactory.getFactory().getMovimientoDAO().create(movimiento);
-
-		// Actualizar cuenta IngresoGasto
-		double valorAntesCuentaDestino = cuentaDestino.getTotal();
-		cuentaDestino.setTotal(valorAntesCuentaDestino + valor);
-		DAOFactory.getFactory().getCuentaDAO().update(cuentaDestino);
+		
 
 		// Volver dashboard
 		request.getRequestDispatcher("/DashboardController?ruta=ver").forward(request, response);
 
 	}
 
-	public void cargarFormularioIngreso(HttpServletRequest request, HttpServletResponse response)
+	private void cargarFormularioIngreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int mes = LocalDate.now().getMonth().getValue();
 
@@ -200,7 +199,7 @@ public class MovimientoController extends HttpServlet {
 
 	}
 
-	public void cargarFormularioEgreso(HttpServletRequest request, HttpServletResponse response)
+	private void cargarFormularioEgreso(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int mes = LocalDate.now().getMonth().getValue();
 

@@ -3,12 +3,26 @@ package utilidades;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La clase Mes representa un mes del año con su id y nombre.
+ * @author Juan Posso, Javier Revelo, Valery Vallejo, Cristian Verduga, Fernando Soto
+ * @version 1.1
+ */
 public class Mes {
 	private int id;
 	private String nombre;
 	
+	/**
+	 * Crea un objeto Mes sin inicializar sus atributos.
+	 */
 	public Mes() {}
 
+	/**
+	 * Crea un objeto Mes con sus atributos inicializados.
+	 * @param id el id del mes.
+	 * @param nombre el nombre del mes.
+	 * 
+	 */
 	public Mes(int id, String nombre) {
 		super();
 		this.id = id;
@@ -31,6 +45,11 @@ public class Mes {
 		this.nombre = nombre;
 	}
 	
+	
+	/**
+	 * Obtiene una lista con todos los meses del año.
+	 * @return una lista los meses.                                                                      
+	 */
 	public static List<Mes> getMeses() {
 		List<Mes> meses = new ArrayList<Mes>();
 		meses.add(new Mes(1, "January"));

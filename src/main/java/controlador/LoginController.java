@@ -12,13 +12,18 @@ import modelo.dao.DAOFactory;
 import modelo.entidades.Usuario;
 
 /**
- * Servlet implementation class LoginController
+ * 
+ * Clase (Servlet) que representa el controlador para unir el modelo con la vista del Login de la aplicacion web 
+ * @author Juan Posso, Javier Revelo, Valery Vallejo, Cristian Verduga, Fernando Soto
+ * @version 1.1
+ *
  */
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Constructor vacio necesario para un servlet que puede ser instanciado desde otras clases
      * @see HttpServlet#HttpServlet()
      */
     public LoginController() {
@@ -65,7 +70,7 @@ public class LoginController extends HttpServlet {
 			
 			request.getRequestDispatcher("DashboardController?ruta=ver").forward(request, response);
 		}else {
-			response.sendRedirect("/jsp/login.jsp");
+			response.sendRedirect("LoginController");
 		}
 		
 	}

@@ -2,6 +2,15 @@ package modelo.dao;
 
 import java.util.List;
 
+
+/**
+ * Interfaz que contiene las firmas de los métodos de la clase JPAGenericDAO
+ * @author Juan Posso, Javier Revelo, Valery Vallejo, Cristian Verduga, Fernando Soto
+ * @version 1.1
+ *
+ * @param <T> Cambia dependiendo de la entidad que extienda
+ * @param <ID> Define el ID unico de cada entidad
+ */
 public interface GenericDAO<T, ID> {
 	
 	public T getById(ID id);
